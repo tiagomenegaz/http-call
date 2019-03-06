@@ -1,32 +1,33 @@
 module HttpCall
   class Base
-    attr_reader :url, :body, :header
+    attr_reader :uri, :body, :header
 
     def initialize(params)
-      @url     = params.fetch(:url)
+      @uri     = format_url(params.fetch(:url))
       @body    = params.fetch(:body, nil)
       @header  = params.fetch(:header, {})
       @attempt = 3
     end
 
-    def call; end
+    protected
 
-    private
-
-    attr_reader :attempt
+    attr_accessor :attempt
 
     def request
       response = yield
-      raise 'Error' if res.is_a?(Net::HTTPSuccess)
+      raise response if !response.is_a?(Net::HTTPSuccess)
       response
     rescue
-      retry_request
-    end
-
-    def retry_request
-      attempt -= 1
+      @attempt -= 1
       return response if attempt == 0
       sleep(5)
+      retry
+    end
+
+    private
+
+    def format_url(url)
+      URI(url)
     end
   end
 end
