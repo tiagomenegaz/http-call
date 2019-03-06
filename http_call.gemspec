@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "This Gem is an abstraction of the basic ruby HTTP request classes with retry functionality"
   s.authors     = ["Tiago Menegaz"]
   s.email       = 'tmmgarcia7@gmail.com'
-  s.files       = ["lib/http_call.rb"]
+  s.files       = `git ls-files`.split($/).select { |file_name| file_name.include?('.rb') }
   s.homepage    = 'http://rubygems.org/gems/hola'
   s.license     = 'MIT'
 end
