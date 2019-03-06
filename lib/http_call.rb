@@ -1,5 +1,5 @@
-class HttCall
-  def self.temp
-    puts 'stub method'
-  end
+module HttpCall
+  require 'net/http'
+  require 'http_call/base'
+  require 'http_call/get'
 end
