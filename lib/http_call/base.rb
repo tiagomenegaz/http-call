@@ -1,4 +1,4 @@
-module HttCall do
+module HttpCall
   class Base
     attr_reader :url, :body, :header
 
