@@ -1,7 +1,7 @@
 module HttpCall
   class Get < Base
     def call
-      request { Net::HTTP.get_response(uri) }
+      request { HTTParty.get(url) }
     end
   end
 end
